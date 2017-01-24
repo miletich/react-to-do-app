@@ -9,7 +9,7 @@ class TodoList extends Component {
   render() {
     const {todos} = this.props;
     const renderTodos = () => {
-      return todos.map((todo) => <Todo key={todo.id} {...todo}/>);
+      return todos.map((todo) => <Todo key={todo.id} {...todo} onToggle={this.props.onToggle}/>);
     };
 
     return (
