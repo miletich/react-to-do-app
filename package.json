@@ -86,6 +86,9 @@
     ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
+    },
+    "globals": {
+      "widow": true
     }
   },
   "babel": {

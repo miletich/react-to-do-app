@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
+import localStorageMock from './../../__mocks__/localStorage';
 import App from './../App';
+
+window.localStorage = localStorageMock;
 
 describe('App', () => {
   it('renders without crashing', () => {
