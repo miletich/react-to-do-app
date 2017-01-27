@@ -21,14 +21,15 @@ class AddTodo extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="container__footer" onSubmit={this.handleSubmit}>
         <FormGroup>
           <FormControl type="text"
             placeholder="What do you need to do?"
             ref={ref => this.inputTodo = ref}
           />
           <Button type="submit"
-            bsStyle="primary">
+            bsStyle="primary"
+            block>
             Add Todo
           </Button>
         </FormGroup>

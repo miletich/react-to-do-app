@@ -18,7 +18,7 @@ class TodoSearch extends Component {
   render() {
     return (
       <div>
-        <FormGroup>
+        <FormGroup className="conatiner__header">
           <FormControl type="search"
             placeholder="Search todos..."
             onChange={this.handleSearch}

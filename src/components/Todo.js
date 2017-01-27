@@ -5,6 +5,7 @@ import moment from 'moment';
 class Todo extends Component {
   render() {
     const {text, completed, createdAt, completedAt} = this.props;
+    const todoClassName = completed ? 'todo todo-completed' : 'todo';
 
     const renderDate = () => {
       let message = 'Created ';
@@ -19,15 +20,17 @@ class Todo extends Component {
     };
 
     return (
-      <li>
+      <li className = {todoClassName}>
         <FormGroup>
           <Checkbox inline
             onClick={() => {
               this.props.onToggle(this.props.id);
             }}
             checked={completed}>
-            <p>{text}</p>
-            <p >{renderDate()}</p>
+            <div>
+              <p>{text}</p>
+              <p className="todo__subtext">{renderDate()}</p>
+            </div>
           </Checkbox>
         </FormGroup>
       </li>

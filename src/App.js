@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import uuid from 'node-uuid';
 import moment from 'moment';
+import {Grid, Row, Col} from 'react-bootstrap';
 
 import TodoList from './components/TodoList';
 import AddTodo from './components/AddTodo';
 import TodoSearch from './components/TodoSearch';
 import TodoAPI from './api/TodoAPI';
-import './App.css';
+import './styles/App.scss';
 
 class App extends Component {
   constructor(props) {
@@ -66,11 +67,18 @@ class App extends Component {
     let filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
 
     return (
-      <div>
-        <TodoSearch onSearch={this.handleSearch} />
-        <TodoList todos={filteredTodos} onToggle={this.handleToggle}/>
-        <AddTodo onAddTodo={this.handleAddTodo}/>
-      </div>
+      <Grid fluid>
+        <Row>
+          <Col xs={12} md={6} mdOffset={3}>
+            <h1 className="page-title">Todo App</h1>
+            <div className="conatiner">
+              <TodoSearch onSearch={this.handleSearch} />
+              <TodoList todos={filteredTodos} onToggle={this.handleToggle}/>
+              <AddTodo onAddTodo={this.handleAddTodo}/>
+            </div>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
