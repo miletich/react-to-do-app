@@ -48,10 +48,6 @@ class App extends Component {
   }
 
   render() {
-    const {todos, showCompleted, searchText} = this.state;
-
-    let filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
-
     return (
       <Grid fluid>
         <Row>

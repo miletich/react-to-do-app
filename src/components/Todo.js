@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { FormGroup, Checkbox } from 'react-bootstrap';
 import moment from 'moment';
@@ -22,7 +22,7 @@ const Todo = (props) => {
     };
 
     return (
-      <li className = {todoClassName}>
+      <li className={todoClassName}>
         <FormGroup>
           <Checkbox inline
             onClick={() => {

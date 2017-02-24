@@ -6,10 +6,6 @@ import {FormGroup, FormControl, Checkbox } from 'react-bootstrap';
 import actions from './../actions/actions';
 
 class TodoSearch extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {dispatch, showCompleted, searchText} = this.props;
     return (
