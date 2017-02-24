@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Todo from './Todo';
 
 class TodoList extends Component {
@@ -14,7 +15,7 @@ class TodoList extends Component {
       }
       return (
         <ul>
-          {todos.map((todo) => <Todo key={todo.id} {...todo} onToggle={this.props.onToggle}/>)}
+          {todos.map((todo) => <Todo key={todo.id} {...todo}/>)}
         </ul>
       );
     };
@@ -27,4 +28,11 @@ class TodoList extends Component {
   }
 }
 
-export default TodoList;
+const wrapped = connect(
+  (state) => {
+    return {
+      todos: state.todos
+    };
+  }
+)(TodoList);
+export {wrapped as default, TodoList};

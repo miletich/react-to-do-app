@@ -19,7 +19,6 @@ class App extends Component {
     }
     this.handleAddTodo = this.handleAddTodo.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.handleToggle = this.handleToggle.bind(this);
   }
 
   componentDidUpdate() {
@@ -48,19 +47,6 @@ class App extends Component {
     });
   }
 
-  handleToggle(id) {
-    const updatedTodos = this.state.todos.map((todo) => {
-      if (todo.id === id) {
-        todo.completed = !todo.completed;
-        todo.completedAt = todo.completed ? moment().unix() : null;
-      }
-
-      return todo;
-    });
-
-    this.setState({todos: updatedTodos});
-  }
-
   render() {
     const {todos, showCompleted, searchText} = this.state;
 
@@ -73,7 +59,7 @@ class App extends Component {
             <h1 className="page-title">Todo App</h1>
             <div className="conatiner">
               <TodoSearch onSearch={this.handleSearch} />
-              <TodoList todos={filteredTodos} onToggle={this.handleToggle}/>
+              <TodoList/>
               <AddTodo onAddTodo={this.handleAddTodo}/>
             </div>
           </Col>

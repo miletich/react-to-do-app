@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { FormGroup, Checkbox } from 'react-bootstrap';
 import moment from 'moment';
 
-class Todo extends Component {
-  render() {
-    const {text, completed, createdAt, completedAt} = this.props;
+import actions from './../actions/actions';
+
+const Todo = (props) => {
+    const {id, text, completed, createdAt, completedAt, dispatch} = props;
     const todoClassName = completed ? 'todo todo-completed' : 'todo';
 
     const renderDate = () => {
@@ -24,7 +26,7 @@ class Todo extends Component {
         <FormGroup>
           <Checkbox inline
             onClick={() => {
-              this.props.onToggle(this.props.id);
+              dispatch(actions.toggleTodo(id));
             }}
             checked={completed}>
             <div>
@@ -36,19 +38,7 @@ class Todo extends Component {
       </li>
     );
   }
-}
 
-/*const Todo = (props) =>
-  <li>
-    <FormGroup>
-      <Checkbox inline
-        onClick={() => {
-          props.onToggle(props.id);
-        }}
-        checked={props.completed}>
-        {props.text}
-      </Checkbox>
-    </FormGroup>
-  </li>
-*/
-export default Todo;
+const wrapped = connect()(Todo);
+
+export { wrapped as default, Todo };

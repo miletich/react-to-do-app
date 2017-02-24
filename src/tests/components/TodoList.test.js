@@ -1,8 +1,11 @@
 import React from 'react';
+import {Provider} from 'react-redux';
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
+
+import configureStore from './../../store/configureStore';
 import TodoList from './../../components/TodoList';
-//import Todo from './../../components/Todo';
+import Todo from './../../components/Todo';
 
 describe('TodoList', () => {
   it('should exist', () => {
@@ -13,27 +16,45 @@ describe('TodoList', () => {
     const todos = [
       {
         id: 1,
-        text: 'do something'
+        text: 'do something',
+        completed: false,
+        completedAt: null,
+        createdAt: 500
       },
       {
         id: 2,
-        text: 'do something else'
+        text: 'do something else',
+        completed: false,
+        completedAt: null,
+        createdAt: 500
       }
     ];
+    const store = configureStore({
+      todos: todos
+    });
 
-    const todoList = TestUtils.renderIntoDocument(<TodoList todos={todos} />);
-
-    // Doesn't work???
-    // const todosComponents = TestUtils.scryRenderedComponentsWithType(todoList, Todo);
-    const todosComponents = TestUtils.scryRenderedDOMComponentsWithTag(todoList, 'li');
+    const provider = TestUtils.renderIntoDocument(
+      <Provider store={store}>
+        <TodoList></TodoList>
+      </Provider>
+    );
+    const todoList = TestUtils.scryRenderedComponentsWithType(provider, TodoList)[0];
+    const todosComponents = TestUtils.scryRenderedComponentsWithType(todoList, Todo);
 
     expect(todosComponents.length).toBe(todos.length);
   });
 
   it('should render empty message if no todos', () => {
-    const todos = [];
-    const todosList = TestUtils.renderIntoDocument(<TodoList todos={todos} />);
-    const message = TestUtils.findRenderedDOMComponentWithClass(todosList, 'conatiner__message');
+    const store = configureStore({
+      todos: []
+    });
+    const provider = TestUtils.renderIntoDocument(
+      <Provider store={store}>
+        <TodoList/>
+      </Provider>
+    );
+    const todosList = TestUtils.scryRenderedComponentsWithType(provider, TodoList)[0];
+    const message = TestUtils.findRenderedDOMComponentWithTag(todosList, 'P');
 
     expect(message.innerHTML).toBe('Nothing to do');
   });

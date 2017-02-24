@@ -42,6 +42,7 @@
     "promise": "7.1.1",
     "react-addons-test-utils": "^15.4.2",
     "react-dev-utils": "^0.4.2",
+    "react-redux": "^5.0.2",
     "recursive-readdir": "2.1.0",
     "redux": "^3.6.0",
     "sass-loader": "^4.1.1",
