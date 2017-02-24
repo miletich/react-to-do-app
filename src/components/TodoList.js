@@ -1,37 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Todo from './Todo';
+import TodoAPI from './../api/TodoAPI';
 
-class TodoList extends Component {
-  constructor(props) {
-    super(props);
-  }
+const TodoList = (props) => {
 
-  render() {
-    const {todos} = this.props;
-    const renderTodos = () => {
-      if (todos.length === 0) {
-        return <p className="container__message">Nothing to do</p>
-      }
-      return (
-        <ul>
-          {todos.map((todo) => <Todo key={todo.id} {...todo}/>)}
-        </ul>
-      );
-    };
-
+const {todos, showCompleted, searchText} = props.state;
+  const renderTodos = () => {
+    if (todos.length === 0) {
+      return <p className="container__message">Nothing to do</p>
+    }
     return (
-      <div>
-        {renderTodos()}
-      </div>
+      <ul>
+        {TodoAPI.filterTodos(todos, showCompleted, searchText).map((todo) => <Todo key={todo.id} {...todo}/>)}
+      </ul>
     );
-  }
+  };
+
+  return (
+    <div>
+      {renderTodos()}
+    </div>
+  );
 }
 
 const wrapped = connect(
   (state) => {
     return {
-      todos: state.todos
+      state
     };
   }
 )(TodoList);

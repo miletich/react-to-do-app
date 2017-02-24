@@ -3,7 +3,7 @@ import redux, { combineReducers, compose, createStore } from 'redux';
 import reducers from './../reducers/reducers';
 const { searchTextReducer, showCompletedReducer, todosReducer } = reducers;
 
-const configure = (initalState = []) => {
+const configure = (initalState = {}) => {
   const reducer = combineReducers({
     searchText: searchTextReducer,
     showCompleted: showCompletedReducer,
