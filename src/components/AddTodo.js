@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import ReactDOM from 'react-dom';
 import { FormControl, FormGroup, Button} from 'react-bootstrap';
+
+import actions from './../actions/actions';
 
 class AddTodo extends Component {
   constructor(props) {
@@ -10,12 +13,12 @@ class AddTodo extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
+    const { dispatch } = this.props;
     const newTodo = ReactDOM.findDOMNode(this.inputTodo).value;
 
     if (newTodo.length > 0) {
       ReactDOM.findDOMNode(this.inputTodo).value = '';
-      this.props.onAddTodo(newTodo);
+      dispatch(actions.addTodo(newTodo));
     }
   }
 
@@ -38,4 +41,5 @@ class AddTodo extends Component {
   }
 }
 
-export default AddTodo;
+const wrapped = connect()(AddTodo);
+export {wrapped as default, AddTodo};
