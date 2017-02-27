@@ -6,13 +6,14 @@ import TodoAPI from './../api/TodoAPI';
 const TodoList = (props) => {
 
 const {todos, showCompleted, searchText} = props.state;
+  const filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
   const renderTodos = () => {
-    if (todos.length === 0) {
+    if (filteredTodos.length === 0) {
       return <p className="container__message">Nothing to do</p>
     }
     return (
       <ul>
-        {TodoAPI.filterTodos(todos, showCompleted, searchText).map((todo) => <Todo key={todo.id} {...todo}/>)}
+        {filteredTodos.map((todo) => <Todo key={todo.id} {...todo}/>)}
       </ul>
     );
   };
